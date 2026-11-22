@@ -24,10 +24,6 @@ from sklearn.preprocessing import StandardScaler
 # ==============================================================================
 # BÀI 1: XÂY DỰNG MÔ HÌNH HỒI QUY TUYẾN TÍNH (THEO ĐỀ LAB 3 & VỞ GHI NOTE 3)
 # ==============================================================================
-# Theo vở ghi Note 3:
-# - Hồi quy (Regression): Dự đoán biến mục tiêu có giá trị liên tục (giá nhà, doanh thu, nhiệt độ...).
-# - Hồi quy đơn biến: y = a*X + b (a: hệ số góc / slope / weight; b: hệ số chặn / intercept).
-# - Cơ chế tối ưu: Phương pháp bình phương tối thiểu (OLS) và thuật toán Gradient Descent
 #   để tìm đường thẳng đi sát các điểm nhất (tổng sai số nhỏ nhất).
 print("=" * 70)
 print("BÀI 1: XÂY DỰNG MÔ HÌNH HỒI QUY TUYẾN TÍNH (TẠO DỮ LIỆU GIẢ LẬP)")
@@ -147,9 +143,6 @@ print(f"Đã lưu biểu đồ Bài 3 tại: {chart_bai3_path}")
 # ==============================================================================
 # BÀI 4: QUY TRÌNH ML HOÀN CHỈNH - HỒI QUY ĐA BIẾN (CALIFORNIA HOUSING)
 # ==============================================================================
-# Theo vở ghi Note 3:
-# Hồi quy đa biến: y = a1*X1 + a2*X2 + ... + an*Xn + b
-# Giúp cải thiện R2 vượt trội so với hồi quy đơn biến.
 print("\n" + "=" * 70)
 print("BÀI 4: HỒI QUY ĐA BIẾN VỚI PIPELINE TRÊN TẬP CALIFORNIA HOUSING")
 print("=" * 70)
@@ -244,4 +237,4 @@ compare_df = pd.DataFrame({
 print("Bảng so sánh hiệu năng các mô hình hồi quy:")
 print(compare_df.to_string(index=False))
 
-print("\nHoàn thành toàn bộ Lab 3 theo đúng đề bài và vở ghi!")
+print("\nHoàn thành!")

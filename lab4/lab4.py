@@ -105,7 +105,7 @@ print("Ma trận nhầm lẫn (Confusion Matrix 2x2):")
 print(cm_c)
 
 # ------------------------------------------------------------------------------
-# GIẢI THÍCH CHI TIẾT 4 THÀNH PHẦN THEO ĐÚNG VỞ GHI BÀI HỌC:
+# GIẢI THÍCH CHI TIẾT 4 THÀNH PHẦN
 # ------------------------------------------------------------------------------
 # Ma trận nhầm lẫn dạng:
 #                   Dự đoán 0 (Malignant)   Dự đoán 1 (Benign)
@@ -121,11 +121,6 @@ print(cm_c)
 # 3. FN (False Negative - Âm tính giả / "Bỏ sót"): Thực tế là Lành tính (1) nhưng bị đoán nhầm thành Ác tính (0).
 # 4. TP (True Positive): Thực tế là Lành tính (1) và mô hình dự đoán đúng là Lành tính (1).
 #    -> Dự đoán chính xác lớp dương tính.
-#
-# Ý nghĩa khẩu quyết nhớ nhanh từ vở ghi:
-# - TP & TN: Số lượng mẫu dự đoán ĐÚNG.
-# - Precision = TP / (TP + FP): "Không bắt nhầm" (Trong những ca đoán Dương tính, bao nhiêu % là đúng thật).
-# - Recall = TP / (TP + FN): "Không bỏ sót" (Trong tất cả ca Dương tính ngoài đời, phát hiện được bao nhiêu %).
 # ------------------------------------------------------------------------------
 
 tn, fp, fn, tp = cm_c.ravel()
@@ -215,12 +210,9 @@ print(f"Đã lưu biểu đồ các mẫu đoán sai tại: {chart_digits_path}"
 # BÀI 5: GIẢNG VIÊN GIAO THÊM - ĐƯỜNG CONG ROC VÀ CHỈ SỐ AUC
 # ==============================================================================
 print("\n" + "=" * 70)
-print("BÀI 5: PHẦN MỞ RỘNG - VẼ ĐƯỜNG CONG ROC & CHỈ SỐ AUC (THEO VỞ GHI)")
+print("BÀI 5: PHẦN MỞ RỘNG - VẼ ĐƯỜNG CONG ROC & CHỈ SỐ AUC")
 print("=" * 70)
 
-# Như ghi chép trong vở ghi:
-# "Cần vẽ biểu đồ => sử dụng đường cong ROC và chỉ số AUC: Dùng để đo lường khả năng
-# phân tích tổng thể giữa các lớp (AUC càng gần 1 thì càng tốt)"
 fig, ax = plt.subplots(figsize=(8, 6))
 RocCurveDisplay.from_estimator(
     lr_cancer,
@@ -243,5 +235,5 @@ print(f"Đã lưu biểu đồ đường cong ROC tại: {chart_roc_path}")
 print(f"Chỉ số AUC thực tế đạt được: {auc_c:.4f} (rất gần 1.0, cho thấy khả năng phân tách cực kỳ xuất sắc!)")
 
 print("\n" + "=" * 70)
-print("HOÀN THÀNH TOÀN BỘ LAB 4 THEO ĐÚNG ĐỀ BÀI VÀ VỞ GHI!")
+print("HOÀN THÀNH!")
 print("=" * 70)
