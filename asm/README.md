@@ -6,17 +6,16 @@
 ### THÔNG TIN NỘP BÀI ASSIGNMENT 1 (HẠN: 23H59 CHỦ NHẬT)
 - **Đề tài:** **Đề tài 11 - Phân tích hành vi và dự báo rời bỏ dịch vụ của khách hàng (Customer Churn Analysis)**
 - **Bộ dữ liệu:** Telco Customer Churn (IBM Developer / Kaggle blastchar)
-- **File báo cáo Word chính thức:** [`ASSIGNMENT_1_HOAN31.docx`](../ASSIGNMENT_1_HOAN31.docx) (hoặc [`asm/ASSIGNMENT_1_HOAN31.docx`](ASSIGNMENT_1_HOAN31.docx))
+- **Báo cáo:** Tóm tắt dữ liệu và kết quả được trình bày trong README này; file Word đã được gỡ khỏi repository.
 
 ---
 
-### BẢNG 3 LIÊN KẾT NỘP BÀI CHÍNH THỨC THEO YÊU CẦU
+### TÀI LIỆU VÀ SẢN PHẨM ĐÃ GIỮ LẠI
 
 | Mục nộp | Nội dung chi tiết | Liên kết trực tiếp |
 | :--- | :--- | :--- |
-| **Link 1: Mã nguồn** | Script Python thực hiện đầy đủ quy trình tiền xử lý dữ liệu và huấn luyện mô hình cơ sở | [**Xem mã nguồn tại GitHub**](https://github.com/HOAN31/hoc_may_co_ban/blob/main/asm/tien_xu_ly_telco.py) |
-| **Link 2: Dữ liệu sau xử lý** | Tập dữ liệu Telco Customer Churn sau khi làm sạch, mã hóa và chuẩn hóa (7.043 dòng x 31 cột) | [**Tải dữ liệu tại GitHub**](https://github.com/HOAN31/hoc_may_co_ban/blob/main/asm/data/telco_churn_preprocessed.csv) |
-| **Link 3: Ảnh chụp kết quả** | Ảnh chụp bảng Dashboard minh chứng kết quả chạy tiền xử lý và đánh giá Baseline Model | [**Xem ảnh kết quả tại GitHub**](https://github.com/HOAN31/hoc_may_co_ban/blob/main/asm/images/ket_qua_chay_tien_xu_ly.png) |
+| **Dữ liệu sau xử lý** | Tập dữ liệu Telco Customer Churn sau khi làm sạch, mã hóa và chuẩn hóa (7.043 dòng x 31 cột) | [**Tải dữ liệu tại GitHub**](https://github.com/HOAN31/hoc_may_co_ban/blob/main/asm/data/telco_churn_preprocessed.csv) |
+| **Ảnh kết quả** | Dashboard minh chứng tiền xử lý và đánh giá Baseline Model | [**Xem ảnh kết quả tại GitHub**](https://github.com/HOAN31/hoc_may_co_ban/blob/main/asm/images/ket_qua_chay_tien_xu_ly.png) |
 
 ---
 
@@ -30,19 +29,20 @@
 ---
 
 ### 2. Các bước tiền xử lý dữ liệu đã thực hiện
-1. **Khám phá dữ liệu (EDA):** Thống kê mô tả số lượng dòng, cột, kiểu dữ liệu, xác định các trường dạng chuỗi (`object`) và phân phối nhãn.
+1. **Khám phá dữ liệu (EDA):** Kiểm tra `shape`, `info()` và `describe()`; thống kê phân phối nhãn Churn.
 2. **Loại bỏ thuộc tính không cần thiết:** Drop cột `customerID` (mã ngẫu nhiên không có giá trị học máy).
 3. **Phát hiện & xử lý dữ liệu khuyết thiếu / sai kiểu:**
    - Cột `TotalCharges` có 11 dòng mang chuỗi khoảng trắng `' '`.
    - Toàn bộ 11 dòng này đều có `tenure = 0` (khách hàng mới đăng ký trong tháng đầu tiên).
    - Chuyển sang dạng `float` và điền giá trị `0.0`.
-4. **Mã hóa biến mục tiêu và biến nhị phân:**
+4. **Phát hiện & xử lý ngoại lệ:** Dùng Boxplot để khảo sát và ngưỡng IQR (1.5 × IQR) học từ Train cho `tenure`, `MonthlyCharges`, `TotalCharges`. Lần chạy hiện tại không có điểm nào vượt ngưỡng nên không làm thay đổi giá trị hay loại bỏ khách hàng; code vẫn chặn giá trị ngoài ngưỡng nếu phát sinh.
+5. **Mã hóa biến mục tiêu và biến nhị phân:**
    - `Churn`: 'No' -> 0, 'Yes' -> 1
    - `gender`: 'Female' -> 0, 'Male' -> 1
    - `Partner`, `Dependents`, `PhoneService`, `PaperlessBilling`: 'No' -> 0, 'Yes' -> 1
-5. **Mã hóa các biến danh mục (One-Hot Encoding):** Áp dụng `pd.get_dummies(..., drop_first=True)` cho 10 biến phân loại nhằm chống bẫy biến giả (Dummy Variable Trap).
-6. **Chuẩn hóa đặc trưng số (Feature Scaling):** Áp dụng `StandardScaler` cho `tenure`, `MonthlyCharges`, `TotalCharges` (đưa về Mean = 0, Std = 1).
-7. **Xuất file dữ liệu sạch:** Lưu tại `asm/data/telco_churn_preprocessed.csv` (7.043 dòng x 31 cột).
+6. **Mã hóa các biến danh mục (One-Hot Encoding):** Áp dụng `pd.get_dummies(..., drop_first=True)` cho 10 biến phân loại nhằm chống bẫy biến giả (Dummy Variable Trap).
+7. **Chia tập và chuẩn hóa:** Chia Train/Test theo tỷ lệ 80:20 (`random_state=42`, stratify theo Churn); ngưỡng IQR và `StandardScaler` chỉ fit trên Train.
+8. **Xuất file dữ liệu sạch:** Lưu tại `asm/data/telco_churn_preprocessed.csv` (7.043 dòng x 31 cột), áp dụng cùng ngưỡng IQR và scaler học từ Train.
 
 ---
 
@@ -63,13 +63,12 @@
 #### Phân phối nhãn mục tiêu Churn:
 ![Phân phối Churn](images/eda_churn_distribution.png)
 
-#### Tương quan giữa thâm niên (tenure) & cước phí tháng với việc rời mạng:
+#### Boxplot thâm niên (tenure) và cước phí tháng theo nhãn Churn:
 ![Phân tích cước phí và thâm niên](images/eda_charges_tenure.png)
 
 ---
 
-### 5. Kế hoạch triển khai Giai đoạn 2
-- Thử nghiệm mô hình nâng cao: **KNN, Decision Tree, Random Forest**.
-- Tinh chỉnh siêu tham số bằng **GridSearchCV** kết hợp **5-Fold Cross-Validation**.
-- Xử lý vấn đề mất cân bằng dữ liệu bằng `class_weight='balanced'`.
-- Đóng gói mô hình tối ưu ra file `.pkl` bằng `joblib`.
+### 5. Kết luận Giai đoạn 1
+- Đã hoàn thành EDA, làm sạch dữ liệu, mã hóa, chuẩn hóa và chia tập dữ liệu.
+- Đã huấn luyện và đánh giá mô hình baseline Logistic Regression bằng các chỉ số Accuracy, Precision, Recall, F1-Score và ROC-AUC.
+- Dữ liệu sau xử lý và các biểu đồ minh chứng đã sẵn sàng để nộp.
