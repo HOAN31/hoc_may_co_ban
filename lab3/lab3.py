@@ -22,9 +22,9 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
 # ==============================================================================
-# BÀI 1: XÂY DỰNG MÔ HÌNH HỒI QUY TUYẾN TÍNH (THEO ĐỀ LAB 3 & VỞ GHI NOTE 3)
+# BÀI 1: XÂY DỰNG MÔ HÌNH HỒI QUY TUYẾN TÍNH
 # ==============================================================================
-#   để tìm đường thẳng đi sát các điểm nhất (tổng sai số nhỏ nhất).
+# Tìm đường thẳng khớp dữ liệu với tổng sai số nhỏ nhất.
 print("=" * 70)
 print("BÀI 1: XÂY DỰNG MÔ HÌNH HỒI QUY TUYẾN TÍNH (TẠO DỮ LIỆU GIẢ LẬP)")
 print("=" * 70)
@@ -50,7 +50,7 @@ print(f"Hệ số chặn mô hình học được (b / inter_)    : {b_learned:.
 print(f"Phương trình hồi quy tìm được: y = {w_learned:.4f} * X + {b_learned:.4f}")
 
 # ==============================================================================
-# BÀI 2: ĐÁNH GIÁ MÔ HÌNH TRÊN TẬP DIABETES (THEO VỞ GHI NOTE 3)
+# BÀI 2: ĐÁNH GIÁ MÔ HÌNH TRÊN TẬP DIABETES
 # ==============================================================================
 print("\n" + "=" * 70)
 print("BÀI 2: ĐÁNH GIÁ MÔ HÌNH VỚI TẬP DỮ LIỆU DIABETES (ĐẶC TRƯNG BMI)")
@@ -91,7 +91,7 @@ print(f"- RMSE (Root MSE)           : {rmse_d:.4f} (Giữ nguyên đơn vị g�
 print(f"- R-squared (R2 Score)      : {r2_d:.4f} ({r2_d * 100:.2f}%)")
 
 # ------------------------------------------------------------------------------
-# GIẢI THÍCH CHI TIẾT THEO VỞ GHI BÀI HỌC NOTE 3:
+# GIẢI THÍCH CHI TIẾT CÁC CHỈ SỐ:
 # ------------------------------------------------------------------------------
 # 1. MAE (Mean Absolute Error):
 #    - Đo khoảng cách trung bình giữa giá trị thực tế và dự đoán: (1/n) * sum(|y - y_hat|).
@@ -100,13 +100,13 @@ print(f"- R-squared (R2 Score)      : {r2_d:.4f} ({r2_d * 100:.2f}%)")
 #    - RMSE = sqrt(MSE) đưa sai số về cùng đơn vị gốc với biến mục tiêu y.
 # 3. R-squared (Hệ số xác định R2):
 #    - Thể hiện mô hình giải thích được bao nhiêu % độ biến động của dữ liệu.
-#    - ĐÁNH GIÁ CHUẨN (THEO VỞ GHI):
+#    - ĐÁNH GIÁ MÔ HÌNH:
 #      + Thế nào được coi là tốt? R2 > 0.7 (giải thích được > 70% dữ liệu).
 #      + Tại sao ở đây R2 chỉ đạt ~ 23.34% (< 70%)?
 #        Vì mô hình này chỉ dùng ĐƠN BIẾN (duy nhất 1 đặc trưng BMI), trong thực tế
 #        bệnh tiểu đường phụ thuộc vào nhiều yếu tố khác (huyết áp, đường huyết, độ tuổi...)
 #        và dữ liệu có nhiều điểm ngoại lệ (Outliers).
-#      + CÁCH CẢI THIỆN (THEO VỞ GHI):
+#      + CÁCH CẢI THIỆN:
 #        Chuyển sang Hồi quy đa biến (thu thập thêm đặc trưng chất lượng như Bài 4),
 #        xử lý ngoại lệ (Outliers), và biến đổi log.
 # ------------------------------------------------------------------------------

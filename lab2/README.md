@@ -1,10 +1,10 @@
 # Lab 2: Tiền Xử Lý Dữ Liệu (Data Preprocessing) & Pipeline
 
-Kho lưu trữ và hướng dẫn thực hành **Lab 2: Dữ liệu và Tiền xử lý** (đối chiếu theo đề bài `ITA202-Lab2.pdf` và vở ghi chép bài học `Note2_ITA202.pdf`).
+Kho lưu trữ và hướng dẫn thực hành **Lab 2: Dữ liệu và Tiền xử lý**.
 
 ---
 
-## 🎯 Mục tiêu & Lý thuyết cốt lõi (Theo Vở Ghi Note 2)
+## 🎯 Mục tiêu & Lý thuyết cốt lõi
 - **Tầm quan trọng của dữ liệu:** Dữ liệu thô ví như *"Dầu mỏ"* — vô giá trị nếu không được tinh chế. Thời gian tiền xử lý dữ liệu chiếm tới **80%** toàn bộ dự án Machine Learning.
 - **Xử lý giá trị thiếu (Missing Values - NaN, None):**
   - Xóa: Dòng nếu thiếu ít, xóa cột nếu thiếu quá nhiều (> 50-60%).
@@ -45,7 +45,7 @@ Kho lưu trữ và hướng dẫn thực hành **Lab 2: Dữ liệu và Tiền x
 - Đóng gói quy trình khép kín bằng `Pipeline(StandardScaler -> LogisticRegression)`.
 - Đánh giá trên tập Test: Độ chính xác đạt **`97.22%`**.
 
-### Bài 5: Phần mở rộng (Theo vở ghi Note 2 - Mã hóa LabelEncoder)
+### Bài 5: Phần mở rộng - Mã hóa LabelEncoder
 - Mã hóa kích thước quần áo `["S", "M", "L", "XL", "M", "S"]` bằng `LabelEncoder`.
 - Giữ nguyên trật tự kích thước có thứ bậc ($S < M < L < XL$).
 

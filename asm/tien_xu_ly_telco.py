@@ -47,7 +47,7 @@ def main():
     print("=" * 80)
 
     # -------------------------------------------------------------
-    # BƯỚC 1: ĐỌC VÀ KHÁM PHÁ DỮ LIỆU GỐC (EDA - THEO NOTE 1 & 2)
+    # BƯỚC 1: ĐỌC VÀ KHÁM PHÁ DỮ LIỆU GỐC (EDA)
     # -------------------------------------------------------------
     raw_data_path = os.path.join("asm", "data", "telco_customer_churn.csv")
     if not os.path.exists(raw_data_path):
@@ -66,13 +66,13 @@ def main():
     print("\n- Thống kê mô tả:")
     print(df.describe(include="all").transpose().to_string())
 
-    # Thống kê phân phối nhãn mục tiêu Churn (Note 1 & 4)
+    # Thống kê phân phối nhãn mục tiêu Churn
     churn_counts = df["Churn"].value_counts()
     churn_ratio = df["Churn"].value_counts(normalize=True) * 100
     print("\n- Phân phối nhãn mục tiêu (Churn):")
     print(f"  + Không rời mạng (No) : {churn_counts['No']} khách hàng ({churn_ratio['No']:.2f}%)")
     print(f"  + Rời mạng (Yes)       : {churn_counts['Yes']} khách hàng ({churn_ratio['Yes']:.2f}%)")
-    print("  => Nhận xét theo Note 4: Dữ liệu có sự chênh lệch lớp (~73.5% vs ~26.5%), cần đánh giá bằng Precision, Recall, F1, ROC-AUC thay vì chỉ dùng Accuracy.")
+    print("  => Dữ liệu có sự chênh lệch lớp (~73.5% vs ~26.5%), cần đánh giá bằng Precision, Recall, F1, ROC-AUC thay vì chỉ dùng Accuracy.")
 
     # -------------------------------------------------------------
     # BƯỚC 2: LOẠI BỎ THUỘC TÍNH KHÔNG MANG GIÁ TRỊ DỰ BÁO
@@ -83,8 +83,7 @@ def main():
         print("  -> Đã loại bỏ cột 'customerID' (mã định danh ngẫu nhiên, không chứa quy luật học máy).")
 
     # -------------------------------------------------------------
-    # BƯỚC 3: XỬ LÝ DỮ LIỆU KHUYẾT THIẾU (MISSING VALUES - THEO NOTE 2)
-    # Note 2: "Ký hiệu NaN, None, ô trống -> Điền Mean, Median, Mode hoặc hằng số"
+    # BƯỚC 3: XỬ LÝ DỮ LIỆU KHUYẾT THIẾU (MISSING VALUES)
     # -------------------------------------------------------------
     print("\n[BƯỚC 3 - XỬ LÝ MISSING] Phát hiện và xử lý dữ liệu khuyết thiếu / sai kiểu:")
     # Cột TotalCharges ban đầu bị đọc là kiểu object/string do có 11 dòng khoảng trắng ' '
@@ -94,7 +93,7 @@ def main():
     if num_space > 0:
         sample_tenure = df.loc[space_mask, "tenure"].unique()
         print(f"  - Khảo sát đặc trưng: Toàn bộ {num_space} khách hàng này đều có tenure = {sample_tenure} (mới đăng ký tháng đầu tiên).")
-        print("  -> Giải pháp theo Note 2: Ép kiểu sang float bằng pd.to_numeric() và điền giá trị hằng số 0.0 hợp lý nghiệp vụ.")
+        print("  -> Ép kiểu sang float bằng pd.to_numeric() và điền giá trị hằng số 0.0 hợp lý nghiệp vụ.")
         df["TotalCharges"] = pd.to_numeric(df["TotalCharges"], errors="coerce").fillna(0.0)
 
     print(f"  - Kiểm tra lại sau xử lý: {df.isnull().sum().sum()} giá trị NaN còn lại.")
@@ -102,8 +101,7 @@ def main():
     print(df[["tenure", "MonthlyCharges", "TotalCharges"]].describe().to_string())
 
     # -------------------------------------------------------------
-    # BƯỚC 4: MÃ HÓA BIẾN MỤC TIÊU VÀ BIẾN NHỊ PHÂN (ENCODING - THEO NOTE 2)
-    # Note 2: "Encoding: Chuyển đổi dữ liệu chữ sang số"
+    # BƯỚC 4: MÃ HÓA BIẾN MỤC TIÊU VÀ BIẾN NHỊ PHÂN (ENCODING)
     # -------------------------------------------------------------
     print("\n[BƯỚC 4 - ENCODING] Mã hóa biến mục tiêu Churn và các biến nhị phân:")
     df["Churn"] = df["Churn"].map({"No": 0, "Yes": 1})
@@ -117,8 +115,7 @@ def main():
     print(f"  - Đã chuyển đổi sang số 0/1 cho các cột nhị phân: gender, {', '.join(binary_cols)}")
 
     # -------------------------------------------------------------
-    # BƯỚC 5: MÃ HÓA CÁC BIẾN DANH MỤC (ONE-HOT ENCODING - THEO NOTE 2)
-    # Note 2: "One-Hot Encoding: tạo cột giả (0, 1) cho dữ liệu định danh để tránh hiểu lầm về thứ tự"
+    # BƯỚC 5: MÃ HÓA CÁC BIẾN DANH MỤC (ONE-HOT ENCODING)
     # -------------------------------------------------------------
     print("\n[BƯỚC 5 - ONE-HOT ENCODING] Mã hóa các biến danh mục bằng One-Hot Encoding:")
     cat_cols = [
@@ -194,7 +191,7 @@ def main():
     print(f"  -> Quy mô tập dữ liệu nộp: {df_preprocessed.shape[0]} dòng x {df_preprocessed.shape[1]} cột (30 features + 1 target)")
 
     # -------------------------------------------------------------
-    # BƯỚC 8: TRỰC QUAN HÓA DỮ LIỆU & ĐỒ THỊ BOXPLOT/ROC (NOTE 1, 2, 4)
+    # BƯỚC 8: TRỰC QUAN HÓA DỮ LIỆU & ĐỒ THỊ BOXPLOT/ROC
     # -------------------------------------------------------------
     print("\n[BƯỚC 8 - VISUALIZATION] Vẽ biểu đồ trực quan hóa dữ liệu:")
     os.makedirs(os.path.join("asm", "images"), exist_ok=True)
@@ -219,7 +216,7 @@ def main():
     plt.savefig(chart1_path, dpi=300)
     plt.close()
 
-    # 8.2 Biểu đồ Boxplot theo Note 2 ("xác định ngoại lệ bằng biểu đồ Boxplot")
+    # 8.2 Biểu đồ Boxplot khảo sát ngoại lệ
     fig, axes = plt.subplots(1, 2, figsize=(14, 5))
     df_plot = df.copy()
 
@@ -227,7 +224,7 @@ def main():
     axes[0].boxplot(data_tenure, tick_labels=["Ở lại (No)", "Rời mạng (Yes)"], patch_artist=True,
                     boxprops=dict(facecolor="#9ecae1", color="#08519c"),
                     medianprops=dict(color="#d9534f", linewidth=2))
-    axes[0].set_title("Khảo sát ngoại lệ (Boxplot Note 2): Thâm niên tenure theo Churn", fontsize=12, fontweight="bold")
+    axes[0].set_title("Khảo sát ngoại lệ: Thâm niên tenure theo Churn", fontsize=12, fontweight="bold")
     axes[0].set_ylabel("Số tháng sử dụng dịch vụ", fontsize=11)
     axes[0].grid(axis="y", linestyle="--", alpha=0.5)
 
@@ -235,7 +232,7 @@ def main():
     axes[1].boxplot(data_charges, tick_labels=["Ở lại (No)", "Rời mạng (Yes)"], patch_artist=True,
                     boxprops=dict(facecolor="#fcbba1", color="#cb181d"),
                     medianprops=dict(color="#2b5c8f", linewidth=2))
-    axes[1].set_title("Khảo sát ngoại lệ (Boxplot Note 2): Cước phí hàng tháng theo Churn", fontsize=12, fontweight="bold")
+    axes[1].set_title("Khảo sát ngoại lệ: Cước phí hàng tháng theo Churn", fontsize=12, fontweight="bold")
     axes[1].set_ylabel("Cước phí hàng tháng ($)", fontsize=11)
     axes[1].grid(axis="y", linestyle="--", alpha=0.5)
 
@@ -261,10 +258,10 @@ def main():
     plt.close()
 
     # -------------------------------------------------------------
-    # BƯỚC 9: HUẤN LUYỆN LOGISTIC REGRESSION (NOTE 2 & 4)
+    # BƯỚC 9: HUẤN LUYỆN LOGISTIC REGRESSION
     # -------------------------------------------------------------
     print("\n[BƯỚC 9 - HUẤN LUYỆN BASELINE] Huấn luyện Logistic Regression:")
-    # Khởi tạo mô hình Logistic Regression (Note 4)
+    # Khởi tạo mô hình Logistic Regression
     baseline_model = LogisticRegression(max_iter=1000, random_state=42)
     baseline_model.fit(X_train, y_train)
 
@@ -272,7 +269,7 @@ def main():
     y_pred = baseline_model.predict(X_test)
     y_prob = baseline_model.predict_proba(X_test)[:, 1]
 
-    # Tính toán toàn bộ chỉ số theo Note 4
+    # Tính toán các chỉ số đánh giá
     acc = accuracy_score(y_test, y_pred)
     prec = precision_score(y_test, y_pred)
     rec = recall_score(y_test, y_pred)
@@ -282,19 +279,19 @@ def main():
     fpr, tpr, thresholds = roc_curve(y_test, y_prob)
 
     print("\n" + "-" * 60)
-    print("KẾT QUẢ ĐÁNH GIÁ MÔ HÌNH LOGISTIC REGRESSION THEO CHUẨN NOTE 4:")
+    print("KẾT QUẢ ĐÁNH GIÁ MÔ HÌNH LOGISTIC REGRESSION:")
     print(f"1. Độ chính xác (Accuracy)               : {acc * 100:.2f}%")
-    print(f"2. Precision ('Không bắt nhầm' - Note 4) : {prec:.4f}")
-    print(f"3. Recall ('Không bỏ sót' - Note 4)      : {rec:.4f}")
+    print(f"2. Precision ('Không bắt nhầm')           : {prec:.4f}")
+    print(f"3. Recall ('Không bỏ sót')                : {rec:.4f}")
     print(f"4. F1-Score (Cân bằng Precision/Recall)  : {f1:.4f}")
     print(f"5. ROC-AUC Score (Khả năng phân tách)   : {roc:.4f}")
     print("-" * 60)
-    print("Ma trận nhầm lẫn (Confusion Matrix Note 4):\n", cm)
+    print("Ma trận nhầm lẫn (Confusion Matrix):\n", cm)
     print("-" * 60)
-    print("Báo cáo phân loại chi tiết (Classification Report Note 4):")
+    print("Báo cáo phân loại chi tiết (Classification Report):")
     print(classification_report(y_test, y_pred, target_names=["Ở lại (0)", "Rời mạng (1)"]))
 
-    # 8.4 Vẽ đường cong ROC-AUC riêng biệt theo Note 4
+    # 8.4 Vẽ đường cong ROC-AUC
     plt.figure(figsize=(8, 6))
     plt.plot(fpr, tpr, color="#0056b3", lw=2.5, label=f"Đường cong ROC (AUC = {roc:.4f})")
     plt.plot([0, 1], [0, 1], color="#d9534f", lw=1.5, linestyle="--", label="Ngẫu nhiên (AUC = 0.5000)")
@@ -302,34 +299,32 @@ def main():
     plt.ylim([0.0, 1.05])
     plt.xlabel("Tỷ lệ dương tính giả FPR (False Positive Rate)", fontsize=11)
     plt.ylabel("Tỷ lệ dương tính thật TPR (True Positive Rate / Recall)", fontsize=11)
-    plt.title("Đường cong ROC & Chỉ số AUC theo Note 4 (Logistic Regression)", fontsize=12, fontweight="bold")
+    plt.title("Đường cong ROC & Chỉ số AUC (Logistic Regression)", fontsize=12, fontweight="bold")
     plt.legend(loc="lower right", fontsize=11)
     plt.grid(True, linestyle="--", alpha=0.5)
     plt.tight_layout()
     roc_chart_path = os.path.join("asm", "images", "duong_cong_roc_auc.png")
     plt.savefig(roc_chart_path, dpi=300)
     plt.close()
-    print(f"  + Đã lưu biểu đồ Đường cong ROC theo Note 4: {roc_chart_path}")
+    print(f"  + Đã lưu biểu đồ Đường cong ROC: {roc_chart_path}")
 
     # 8.5 Xuất ảnh Dashboard tổng hợp minh chứng thực thi (Link 3 nộp bài)
     fig = plt.figure(figsize=(16, 11))
     gs = fig.add_gridspec(2, 2, height_ratios=[1, 1.2])
 
-    # Bảng tóm tắt đối chiếu vở ghi
+    # Bảng tóm tắt quy trình
     ax_info = fig.add_subplot(gs[0, :])
     ax_info.axis("off")
 
     summary_text = (
-        "BÁO CÁO KẾT QUẢ TIỀN XỬ LÝ DỮ LIỆU & ĐỐI CHIẾU VỞ GHI (NOTE 1 -> NOTE 4)\n"
+        "BÁO CÁO KẾT QUẢ TIỀN XỬ LÝ DỮ LIỆU VÀ ĐÁNH GIÁ MÔ HÌNH\n"
         "Đề tài 11: Customer Churn Analysis | Dữ liệu: Telco Customer Churn (7,043 dòng x 21 cột gốc)\n"
         + "=" * 98 + "\n"
-        "✓ Note 1 (Quy trình chuẩn ML)    : Tuân thủ đầy đủ 8 bước từ EDA, Tiền xử lý, Scaling đến Đánh giá mô hình.\n"
-        "✓ Note 2 (Làm sạch & Missing NaN): Cột 'TotalCharges' có 11 khoảng trắng rỗng (' ') do tenure=0 -> Điền 0.0 theo nghiệp vụ.\n"
-        "✓ Note 2 (Xử lý Outlier)        : Chặn giá trị ngoài ngưỡng IQR; giữ nguyên số lượng khách hàng.\n"
-        "✓ Note 2 (Mã hóa Encoding)       : Binary Encoding (gender, Partner...) + One-Hot Encoding drop_first=True (chống bẫy biến giả).\n"
-        "✓ Note 2 (Chuẩn hóa & Leakage)  : Chia 80:20; IQR và StandardScaler chỉ fit trên Train.\n"
-        "✓ Note 4 (Logistic Regression)   : Dùng hàm Sigmoid, ngưỡng xác suất mặc định 0.5 để phân loại nhị phân.\n"
-        f"✓ Note 4 (Đánh giá toàn diện)    : Accuracy = {acc*100:.2f}% | Precision = {prec:.4f} ('không bắt nhầm')\n"
+        "✓ EDA và làm sạch dữ liệu       : Xử lý 11 ô trống của TotalCharges; kiểm tra ngoại lệ.\n"
+        "✓ Mã hóa dữ liệu                : Binary Encoding và One-Hot Encoding drop_first=True.\n"
+        "✓ Chuẩn hóa và chống Leakage    : Chia 80:20; IQR và StandardScaler chỉ fit trên Train.\n"
+        "✓ Mô hình cơ sở                : Logistic Regression với ngưỡng xác suất mặc định 0.5.\n"
+        f"✓ Đánh giá mô hình              : Accuracy = {acc*100:.2f}% | Precision = {prec:.4f} ('không bắt nhầm')\n"
         f"                                   Recall = {rec:.4f} ('không bỏ sót') | F1-Score = {f1:.4f} | ROC-AUC = {roc:.4f}\n"
         + "=" * 98 + "\n"
     )
@@ -342,7 +337,7 @@ def main():
     for i in range(cm.shape[0]):
         for j in range(cm.shape[1]):
             ax_cm.text(x=j, y=i, s=f"{cm[i, j]:,}", va="center", ha="center", size="xx-large", weight="bold")
-    ax_cm.set_title("Ma trận nhầm lẫn 2x2 (Note 4: TP, TN, FP, FN)", fontsize=11, fontweight="bold", pad=15)
+    ax_cm.set_title("Ma trận nhầm lẫn 2x2 (TP, TN, FP, FN)", fontsize=11, fontweight="bold", pad=15)
     ax_cm.set_xlabel("Nhãn dự đoán (Predicted Label)", fontsize=10)
     ax_cm.set_ylabel("Nhãn thực tế (True Label)", fontsize=10)
     ax_cm.set_xticks([0, 1])
@@ -357,7 +352,7 @@ def main():
     metric_values = [acc, prec, rec, f1, roc]
     bars = ax_metrics.bar(metric_names, metric_values, color=["#007bff", "#28a745", "#ffc107", "#fd7e14", "#20c997"], width=0.5)
     ax_metrics.set_ylim(0, 1.1)
-    ax_metrics.set_title("Các chỉ số đánh giá phân loại toàn diện (Note 4)", fontsize=11, fontweight="bold")
+    ax_metrics.set_title("Các chỉ số đánh giá phân loại toàn diện", fontsize=11, fontweight="bold")
     ax_metrics.set_ylabel("Điểm số (0.0 - 1.0)", fontsize=10)
     for bar, val in zip(bars, metric_values):
         ax_metrics.text(bar.get_x() + bar.get_width()/2, val + 0.02, f"{val:.3f}", ha="center", fontweight="bold", fontsize=10)

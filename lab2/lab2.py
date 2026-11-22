@@ -16,12 +16,9 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler, StandardScaler
 
 # ==============================================================================
-# BÀI 1: LÀM SẠCH DỮ LIỆU (THEO ĐỀ LAB 2 & VỞ GHI NOTE 2)
+# BÀI 1: LÀM SẠCH DỮ LIỆU
 # ==============================================================================
-# Theo vở ghi:
-# - Dữ liệu thô như "Dầu mỏ" => vô giá trị nếu không được tinh chế (tiền xử lý chiếm 80% ML).
-# - Xử lý giá trị thiếu (NaN): Điền bằng Mean (trung bình), Median (trung vị), hoặc Mode.
-# - Xử lý ngoại lệ (Outliers): Các giá trị cách xa phần còn lại, xử lý bằng 3σ hoặc IQR.
+
 print("=" * 60)
 print("=== Bài 1: Làm sạch dữ liệu (Missing Values & Outliers) ===")
 print("=" * 60)
@@ -43,7 +40,7 @@ print(df.isnull().sum())
 
 cleaned_df = df.copy()
 for col in cleaned_df.columns:
-    # 1. Điền giá trị thiếu bằng Mean (hoặc Median như trong vở ghi)
+    # 1. Điền giá trị thiếu bằng Mean
     mean_value = cleaned_df[col].mean()
     cleaned_df[col] = cleaned_df[col].fillna(mean_value)
     
@@ -58,12 +55,9 @@ print("\n2. Dữ liệu sau khi điền giá trị thiếu và xử lý outlier 
 print(cleaned_df)
 
 # ==============================================================================
-# BÀI 2: CHUẨN HÓA DỮ LIỆU - SCALING (THEO ĐỀ LAB 2 & VỞ GHI NOTE 2)
+# BÀI 2: CHUẨN HÓA DỮ LIỆU - SCALING
 # ==============================================================================
-# Theo vở ghi:
-# - Chuẩn hóa tránh việc cột có giá trị lớn (ví dụ: Thu nhập/Lương) lấn át cột có giá trị nhỏ (Tuổi).
-# - StandardScaler: Đưa về phân phối chuẩn (Mean = 0, Std = 1).
-# - MinMaxScaler: Đưa về khoảng từ 0 đến 1.
+
 print("\n" + "=" * 60)
 print("=== Bài 2: Chuẩn hóa dữ liệu (StandardScaler & MinMaxScaler) ===")
 print("=" * 60)
@@ -95,9 +89,7 @@ print(pd.DataFrame(X_minmax, columns=feature_names))
 # ==============================================================================
 # BÀI 3: CHIA TẬP DỮ LIỆU TRAIN / TEST
 # ==============================================================================
-# Theo vở ghi:
-# - Chia tập dữ liệu (Train 70-80%, Test 20-30%) để đánh giá năng lực thực tế.
-# - LƯU Ý CỐT LÕI: Không bao giờ cho máy nhìn thấy tập Test trước để tránh Rò rỉ dữ liệu (Data Leak).
+
 print("\n" + "=" * 60)
 print("=== Bài 3: Chia tập dữ liệu Train/Test trên tập Diabetes ===")
 print("=" * 60)
@@ -146,14 +138,14 @@ print("Kích thước tập Test Digits:", X_digits_test.shape, y_digits_test.sh
 print(f"Độ chính xác (Accuracy) trên tập Test: {accuracy:.4f} ({accuracy * 100:.2f}%)")
 
 # ==============================================================================
-# BÀI 5: GIẢNG VIÊN GIAO THÊM - MÃ HÓA ENCODING (THEO VỞ GHI NOTE 2)
+# BÀI 5: MÃ HÓA ENCODING
 # ==============================================================================
-# Theo vở ghi Note 2:
+# Giải thích mã hóa:
 # - Encoding: Chuyển đổi dữ liệu chữ sang số.
 # - LabelEncoder: Gán số nguyên cho dữ liệu có thứ bậc (S < M < L < XL) giúp giữ nguyên trật tự kích thước.
 # - One-Hot Encoding: Tạo cột giả (0, 1) cho dữ liệu định danh không có thứ bậc (ví dụ màu sắc).
 print("\n" + "=" * 60)
-print("=== Bài 5: Phần mở rộng theo vở ghi - Mã hóa dữ liệu (Encoding) ===")
+print("=== Bài 5: Phần mở rộng - Mã hóa dữ liệu (Encoding) ===")
 print("=" * 60)
 
 kich_thuoc = ["S", "M", "L", "XL", "M", "S"]
@@ -164,4 +156,4 @@ df_size["Encoded"] = encoder.fit_transform(df_size["Kich_Thuoc"])
 print("Kết quả mã hóa kích thước quần áo bằng LabelEncoder (giữ trật tự S < M < L < XL):")
 print(df_size)
 
-print("\nHoàn thành toàn bộ Lab 2 theo đúng đề bài và vở ghi!")
+print("\nHoàn thành!")

@@ -1,10 +1,10 @@
 # Lab 3: Hồi Quy Tuyến Tính (Linear Regression)
 
-Kho lưu trữ và hướng dẫn thực hành **Lab 3: Hồi quy tuyến tính** (đối chiếu theo đề bài `ITA202-Lab3.pdf` và vở ghi chép bài học `Note3_ITA202.pdf`).
+Kho lưu trữ và hướng dẫn thực hành **Lab 3: Hồi quy tuyến tính**.
 
 ---
 
-## 🎯 Mục tiêu & Lý thuyết cốt lõi (Theo Vở Ghi Note 3)
+## 🎯 Mục tiêu & Lý thuyết cốt lõi
 - **Bản chất bài toán Hồi quy (Regression):**
   - Dự đoán 1 biến mục tiêu có giá trị liên tục (một con số cụ thể, ví dụ: Giá nhà, Doanh thu, Nhiệt độ...).
   - **Hồi quy đơn biến (Simple Linear Regression):** 1 biến đầu vào $X$ và 1 biến đầu ra $y$:
@@ -20,7 +20,7 @@ Kho lưu trữ và hướng dẫn thực hành **Lab 3: Hồi quy tuyến tính*
   - **$R^2$ (Hệ số xác định):** Mô hình giải thích được bao nhiêu % độ biến động của dữ liệu.
     - **Thế nào được coi là tốt?** $R^2 > 0.7$ ($> 70\%$).
     - **Tại sao mô hình BMI chỉ đạt ~ 23.34% ($< 70\%$)?** Do chỉ dùng 1 biến duy nhất và chịu ảnh hưởng của các điểm ngoại lệ (Outliers).
-    - **Cách cải thiện (Theo vở ghi):** Chuyển sang hồi quy đa biến ($y = a_1 X_1 + a_2 X_2 + ... + b$), xử lý điểm ngoại lệ, thu thập thêm đặc trưng chất lượng, biến đổi log.
+    - **Cách cải thiện:** Chuyển sang hồi quy đa biến ($y = a_1 X_1 + a_2 X_2 + ... + b$), xử lý điểm ngoại lệ, thu thập thêm đặc trưng chất lượng, biến đổi log.
 
 ---
 

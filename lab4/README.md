@@ -1,6 +1,6 @@
 # Lab 4: Phân Loại – Logistic Regression
 
-Kho lưu trữ và hướng dẫn thực hành **Lab 4: Phân loại – Logistic Regression** (kết hợp theo đề bài `ITA202-Lab4.pdf` và vở ghi chép bài học `NOte4_ITA202.pdf`).
+Kho lưu trữ và hướng dẫn thực hành **Lab 4: Phân loại – Logistic Regression**.
 
 ---
 
@@ -40,7 +40,7 @@ Kho lưu trữ và hướng dẫn thực hành **Lab 4: Phân loại – Logisti
 
 ### Bài 3: Ma trận nhầm lẫn (Confusion Matrix)
 - Khởi tạo ma trận nhầm lẫn từ kết quả dự đoán với `confusion_matrix`.
-- **Giải thích 4 thành phần theo vở ghi:**
+- **Giải thích 4 thành phần:**
   - **TP (True Positive - 71 ca):** Thực tế là Lành tính (1) và mô hình đoán đúng là Lành tính (1).
   - **TN (True Negative - 41 ca):** Thực tế là Ác tính (0) và mô hình đoán đúng là Ác tính (0).
   - **FP (False Positive - 1 ca):** Bắt nhầm (Thực tế là Ác tính nhưng đoán nhầm thành Lành tính).
@@ -53,7 +53,7 @@ Kho lưu trữ và hướng dẫn thực hành **Lab 4: Phân loại – Logisti
 - Đánh giá trên tập Test: Đạt **Accuracy = 97.22%** (chỉ sai 10 / 360 mẫu test).
 - Tìm, in danh sách và hiển thị ảnh của **5 mẫu dự đoán sai đầu tiên** (lưu ảnh `bai4_digits_misclassified.png`).
 
-### Bài 5: Phần mở rộng (Theo vở ghi - Đường cong ROC & AUC)
+### Bài 5: Phần mở rộng - Đường cong ROC & AUC
 - Vẽ đường cong ROC (Receiver Operating Characteristic) đối chiếu với đường ngẫu nhiên ($AUC = 0.5$).
 - Chỉ số $AUC$ đạt **0.9954**, chứng minh mô hình phân tách cực kỳ xuất sắc giữa hai lớp bệnh.
 - Xuất ảnh đồ thị `bai5_roc_curve.png`.
