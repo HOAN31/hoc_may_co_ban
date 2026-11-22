@@ -3,16 +3,6 @@
 BÀI TẬP LỚN / ASSIGNMENT GIAI ĐOẠN 1 - MÔN HỌC MÁY CƠ BẢN (ITA202)
 ĐỀ TÀI 11: PHÂN TÍCH HÀNH VI VÀ DỰ BÁO RỜI BỎ DỊCH VỤ CỦA KHÁCH HÀNG (TELCO CUSTOMER CHURN)
 
-Tuân thủ nghiêm ngặt 100% hướng dẫn trong 4 VỞ GHI (vo_ghi):
-- Note 1: Quy trình 8 bước chuẩn ML, thư viện chuẩn NumPy, Pandas, Scikit-learn, Matplotlib.
-- Note 2: Tiền xử lý dữ liệu (Xử lý NaN, khảo sát Boxplot và chặn Outlier bằng IQR, Encoding One-Hot/Binary,
-          Scaling với StandardScaler Mean=0, Std=1, Chia tập 80:20 random_state=42,
-          Tuyệt đối chống rò rỉ dữ liệu - Data Leakage).
-- Note 4: Phân loại Logistic Regression (Hàm Sigmoid, ngưỡng 0.5), Đánh giá toàn diện
-          Ma trận nhầm lẫn (Confusion Matrix TP/TN/FP/FN), Precision ("không bắt nhầm"),
-          Recall ("không bỏ sót"), F1-Score cân bằng, và Đường cong ROC - AUC.
-
-Tác giả: Sinh viên FPT Polytechnic
 Mã nguồn: https://github.com/HOAN31/hoc_may_co_ban
 """
 
