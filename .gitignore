@@ -20,3 +20,7 @@ __pycache__/
 .vscode/
 .idea/
 *.swp
+
+# Tài liệu học tập không đưa lên GitHub
+/vo_ghi/
+/lab_pdf/
