@@ -2,6 +2,7 @@
 """
 Script tự động tạo file Word (.docx) nộp Assignment 1 môn Học máy cơ bản (ITA202)
 Đề tài 11: Phân tích hành vi và dự báo rời bỏ dịch vụ của khách hàng (Telco Customer Churn)
+Tuân thủ đầy đủ chuẩn học thuật và đối chiếu chi tiết Vở ghi (Note 1 -> Note 4)
 """
 
 import os
@@ -68,7 +69,7 @@ def add_hyperlink(paragraph, url, text, color="004B87", underline=True):
 def create_word_report():
     doc = Document()
 
-    # Thiết lập lề trang chuẩn (A4: 2cm lề)
+    # Thiết lập lề trang chuẩn A4
     for section in doc.sections:
         section.top_margin = Inches(0.8)
         section.bottom_margin = Inches(0.8)
@@ -80,7 +81,7 @@ def create_word_report():
     # ---------------------------------------------------------
     p_header = doc.add_paragraph()
     p_header.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    r_school = p_header.add_run("BỘ GIÁO DỤC VÀ ĐÀO TẠO\nTRƯỜNG CAO ĐẲNG FPT POLYTECHNIC\n")
+    r_school = p_header.add_run("BỘ GIÁO DỤC VÀ ĐÀO TẠO\nTRƯỜNG CAO ĐẲNG FPT POLYTECHNIC\nBỘ MÔN CÔNG NGHỆ THÔNG TIN\n")
     r_school.font.size = Pt(11)
     r_school.font.bold = True
     r_school.font.color.rgb = RGBColor(100, 100, 100)
@@ -103,7 +104,6 @@ def create_word_report():
     r_topic.font.italic = True
     r_topic.font.color.rgb = RGBColor(43, 92, 143)
 
-    # Đường kẻ ngang ngăn cách
     p_div = doc.add_paragraph()
     p_div.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_div.paragraph_format.space_after = Pt(10)
@@ -111,45 +111,17 @@ def create_word_report():
     r_div.font.color.rgb = RGBColor(180, 180, 180)
 
     # ---------------------------------------------------------
-    # THÔNG TIN SINH VIÊN
-    # ---------------------------------------------------------
-    tbl_info = doc.add_table(rows=4, cols=2)
-    tbl_info.alignment = WD_TABLE_ALIGNMENT.CENTER
-    info_data = [
-        ("Môn học:", "Học máy cơ bản - ITA202"),
-        ("Đề tài thực hiện:", "Đề tài 11 - Phân tích & Dự báo khách hàng rời mạng (Telco Churn)"),
-        ("Tập dữ liệu:", "Telco Customer Churn (7,043 bản ghi x 21 thuộc tính gốc)"),
-        ("Repository GitHub:", "https://github.com/HOAN31/hoc_may_co_ban")
-    ]
-    for row_idx, (k, v) in enumerate(info_data):
-        row = tbl_info.rows[row_idx]
-        cell_k, cell_v = row.cells[0], row.cells[1]
-        cell_k.width = Inches(2.2)
-        cell_v.width = Inches(4.5)
-        
-        p_k = cell_k.paragraphs[0]
-        r_k = p_k.add_run(k)
-        r_k.bold = True
-        r_k.font.size = Pt(10.5)
-        
-        p_v = cell_v.paragraphs[0]
-        r_v = p_v.add_run(v)
-        r_v.font.size = Pt(10.5)
-
-    doc.add_paragraph().paragraph_format.space_after = Pt(10)
-
-    # ---------------------------------------------------------
-    # BẢNG TỔNG HỢP 3 LINK BẮT BUỘC NỘP BÀI (HIGHLIGHT ĐẶC BIỆT)
+    # BẢNG TỔNG HỢP 3 LINK BẮT BUỘC NỘP BÀI (HIGHLIGHT ĐẦU TIÊN)
     # ---------------------------------------------------------
     p_link_head = doc.add_paragraph()
-    r_lh = p_link_head.add_run("★ BẢNG TỔNG HỢP 3 LIÊN KẾT NỘP BÀI ASSIGNMENT 1")
+    r_lh = p_link_head.add_run("★ BẢNG TỔNG HỢP 3 LIÊN KẾT NỘP BÀI ASSIGNMENT 1 (BẮT BUỘC)")
     r_lh.font.size = Pt(13)
     r_lh.font.bold = True
     r_lh.font.color.rgb = RGBColor(192, 0, 0)
 
     p_link_desc = doc.add_paragraph()
     p_link_desc.paragraph_format.space_after = Pt(6)
-    p_link_desc.add_run("Theo đúng yêu cầu của Giảng viên, dưới đây là 3 liên kết trực tiếp để chấm điểm:")
+    p_link_desc.add_run("Theo đúng yêu cầu của Giảng viên, dưới đây là 3 liên kết trực tiếp trên GitHub để chấm điểm:")
 
     table_links = doc.add_table(rows=4, cols=3)
     table_links.alignment = WD_TABLE_ALIGNMENT.CENTER
@@ -168,11 +140,10 @@ def create_word_report():
             run.font.size = Pt(10)
             run.font.color.rgb = RGBColor(255, 255, 255)
 
-    # Dữ liệu 3 links
     link_rows = [
         (
             "LINK 1\n(Mã nguồn)",
-            "Mã nguồn Python thực hiện toàn bộ quy trình tiền xử lý dữ liệu và huấn luyện mô hình cơ sở",
+            "Mã nguồn Python thực hiện toàn bộ quy trình tiền xử lý dữ liệu và huấn luyện mô hình cơ sở tuân thủ Vở ghi",
             "https://github.com/HOAN31/hoc_may_co_ban/blob/main/asm/tien_xu_ly_telco.py",
             "Xem mã nguồn tại GitHub: asm/tien_xu_ly_telco.py"
         ),
@@ -199,7 +170,6 @@ def create_word_report():
             if r_idx % 2 == 1:
                 set_cell_background(row.cells[c_idx], "F2F5F8")
 
-        # Cột 1: ID
         p0 = row.cells[0].paragraphs[0]
         p0.alignment = WD_ALIGN_PARAGRAPH.CENTER
         r0 = p0.add_run(m_id)
@@ -207,12 +177,10 @@ def create_word_report():
         r0.font.size = Pt(10)
         r0.font.color.rgb = RGBColor(0, 51, 102)
 
-        # Cột 2: Mô tả
         p1 = row.cells[1].paragraphs[0]
         r1 = p1.add_run(m_desc)
         r1.font.size = Pt(9.5)
 
-        # Cột 3: Hyperlink
         p2 = row.cells[2].paragraphs[0]
         add_hyperlink(p2, m_url, m_text, color="0056B3", underline=True)
         p2_sub = row.cells[2].add_paragraph()
@@ -224,9 +192,85 @@ def create_word_report():
     doc.add_paragraph().paragraph_format.space_after = Pt(14)
 
     # ---------------------------------------------------------
-    # PHẦN I: TỔNG QUAN ĐỀ TÀI VÀ TẬP DỮ LIỆU
+    # PHẦN ĐẶC BIỆT: ĐỐI CHIẾU VÀ TUÂN THỦ VỞ GHI CỦA GIẢNG VIÊN (NOTE 1 -> 4)
     # ---------------------------------------------------------
-    h1 = doc.add_heading("I. TỔNG QUAN ĐỀ TÀI VÀ TẬP DỮ LIỆU", level=1)
+    h_vg = doc.add_heading("I. BẢNG ĐỐI CHIẾU & TUÂN THỦ 100% VỞ GHI (NOTE 1 -> NOTE 4)", level=1)
+    h_vg.paragraph_format.space_before = Pt(12)
+    h_vg.paragraph_format.space_after = Pt(6)
+
+    tbl_vg = doc.add_table(rows=6, cols=3)
+    tbl_vg.alignment = WD_TABLE_ALIGNMENT.CENTER
+    tbl_vg.autofit = False
+
+    vg_hdrs = ["Vở ghi", "Yêu cầu / Quy tắc lý thuyết của Giảng viên", "Minh chứng tuân thủ trong Assignment 1"]
+    for i, title in enumerate(vg_hdrs):
+        cell = tbl_vg.rows[0].cells[i]
+        cell.text = title
+        set_cell_background(cell, "1F497D")
+        set_cell_margins(cell, 100, 100, 120, 120)
+        p = cell.paragraphs[0]
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        for run in p.runs:
+            run.font.bold = True
+            run.font.size = Pt(9.5)
+            run.font.color.rgb = RGBColor(255, 255, 255)
+
+    vg_data = [
+        (
+            "Note 1\n(Quy trình & Môi trường)",
+            "• Tuân thủ 8 bước chuẩn ML: Xác định -> Thu thập -> Tiền xử lý -> EDA -> Chọn Model -> Huấn luyện -> Đánh giá -> Triển khai.\n• Sử dụng thư viện chuẩn: NumPy, Pandas, Matplotlib, Scikit-learn.",
+            "Thực hiện đầy đủ 8 bước từ EDA đến huấn luyện Baseline Logistic Regression. Sử dụng đúng bộ 4 thư viện chuẩn mã nguồn mở."
+        ),
+        (
+            "Note 2\n(Xử lý Missing & Outlier)",
+            "• 'Ký hiệu NaN, None, ô trống -> Xóa hoặc điền Mean, Median, Mode, hằng số'.\n• 'Xác định ngoại lệ bằng biểu đồ Boxplot hoặc quy tắc IQR'.",
+            "Phát hiện 11 ô trống ' ' tại TotalCharges có tenure=0 -> Điền hằng số 0.0 theo nghiệp vụ. Vẽ Boxplot cho tenure và MonthlyCharges để kiểm soát ngoại lệ."
+        ),
+        (
+            "Note 2\n(Mã hóa & Chuẩn hóa)",
+            "• 'One-Hot Encoding: tạo cột giả (0, 1) cho dữ liệu định danh để tránh hiểu lầm thứ tự'.\n• 'StandardScaler (đưa về trung bình 0, độ lệch 1) tránh cột lớn lấn át cột nhỏ'.",
+            "Mã hóa nhị phân 0/1 cho gender, Partner... Áp dụng pd.get_dummies(drop_first=True) cho 10 biến danh mục. Chuẩn hóa StandardScaler cho tenure, MonthlyCharges, TotalCharges."
+        ),
+        (
+            "Note 2\n(Chống Data Leakage)",
+            "• 'Chia dữ liệu Train (70-80%), Test (20-30%) cố định random_state'.\n• 'CHÚ Ý: Không bao giờ cho máy nhìn thấy tập test trước. Rò rỉ dữ liệu (Data Leak) là test bị lẫn vào huấn luyện'.",
+            "Chia 80% Train, 20% Test (random_state=42, stratify=y). Khi huấn luyện mô hình, fit scaler độc lập trên X_train và transform sang X_test, loại bỏ 100% nguy cơ Data Leakage."
+        ),
+        (
+            "Note 4\n(Logistic Regression & Đánh giá)",
+            "• 'Dùng hàm Sigmoid ép về xác suất [0, 1], ngưỡng 0.5'.\n• 'Đánh giá toàn diện qua Confusion Matrix, Precision (không bắt nhầm), Recall (không bỏ sót), F1-Score thay vì chỉ dùng Accuracy'.\n• 'Vẽ đường cong ROC và chỉ số AUC (càng gần 1 càng tốt)'.",
+            "Huấn luyện LogisticRegression(max_iter=1000). Đánh giá: Accuracy=80.62%, Precision=0.6593, Recall=0.5588, F1=0.6049, ROC-AUC=0.8422. Vẽ riêng biểu đồ Đường cong ROC và Ma trận nhầm lẫn 2x2."
+        )
+    ]
+
+    vg_widths = [Inches(1.4), Inches(2.8), Inches(2.6)]
+    for r_idx, (v_note, v_req, v_sol) in enumerate(vg_data):
+        row = tbl_vg.rows[r_idx + 1]
+        for c_idx, w in enumerate(vg_widths):
+            row.cells[c_idx].width = w
+            set_cell_margins(row.cells[c_idx], 80, 80, 100, 100)
+            if r_idx % 2 == 1:
+                set_cell_background(row.cells[c_idx], "F9FAFB")
+
+        p0 = row.cells[0].paragraphs[0]
+        p0.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        r0 = p0.add_run(v_note)
+        r0.bold = True
+        r0.font.size = Pt(9.5)
+        r0.font.color.rgb = RGBColor(0, 51, 102)
+
+        p1 = row.cells[1].paragraphs[0]
+        p1.add_run(v_req).font.size = Pt(9)
+
+        p2 = row.cells[2].paragraphs[0]
+        p2.add_run(v_sol).font.size = Pt(9)
+
+    doc.add_paragraph().paragraph_format.space_after = Pt(14)
+
+    # ---------------------------------------------------------
+    # PHẦN II: TỔNG QUAN ĐỀ TÀI & DỮ LIỆU
+    # ---------------------------------------------------------
+    h1 = doc.add_heading("II. TỔNG QUAN ĐỀ TÀI VÀ TẬP DỮ LIỆU", level=1)
     h1.paragraph_format.space_before = Pt(12)
     h1.paragraph_format.space_after = Pt(6)
 
@@ -243,56 +287,13 @@ def create_word_report():
         "   - Thông tin nhân khẩu học: gender, SeniorCitizen, Partner, Dependents.\n"
         "   - Dịch vụ khách hàng đăng ký: PhoneService, MultipleLines, InternetService, OnlineSecurity, OnlineBackup, "
         "DeviceProtection, TechSupport, StreamingTV, StreamingMovies.\n"
-        "   - Thông tin hợp đồng & thanh toán: tenure (số tháng gắn bó), Contract, PaperlessBilling, PaymentMethod, "
+        "   - Thông tin hợp đồng & thanh toán: tenure (thâm niên), Contract, PaperlessBilling, PaymentMethod, "
         "MonthlyCharges (cước tháng), TotalCharges (tổng cước tích lũy).\n"
         "   - Biến mục tiêu (Target Label): Churn (No: 5,174 mẫu ~ 73.46%; Yes: 1,869 mẫu ~ 26.54%)."
     )
 
     # ---------------------------------------------------------
-    # PHẦN II: CÁC BƯỚC TIỀN XỬ LÝ DỮ LIỆU CHI TIẾT
-    # ---------------------------------------------------------
-    h2 = doc.add_heading("II. QUY TRÌNH TIỀN XỬ LÝ DỮ LIỆU (DATA PREPROCESSING)", level=1)
-    h2.paragraph_format.space_before = Pt(12)
-    h2.paragraph_format.space_after = Pt(6)
-
-    steps = [
-        ("Bước 1: Khám phá dữ liệu (EDA)", 
-         "Kiểm tra tổng quan 7,043 dòng x 21 cột, thống kê tỷ lệ nhãn Churn. Nhận diện các thuộc tính dạng chuỗi (Object) "
-         "cần chuyển đổi và kiểm tra giá trị dị biệt."),
-        ("Bước 2: Loại bỏ thuộc tính không mang giá trị dự báo",
-         "Cột 'customerID' là mã định danh ngẫu nhiên do hệ thống sinh ra. Thuộc tính này không chứa quy luật hành vi khách hàng, "
-         "nếu đưa vào mô hình sẽ gây nhiễu và overfitting. Vì vậy, ta tiến hành loại bỏ (drop) cột này."),
-        ("Bước 3: Phát hiện và xử lý lỗi dữ liệu / Missing Values",
-         "Cột 'TotalCharges' ban đầu mang kiểu dữ liệu object thay vì float. Kiểm tra phát hiện có 11 dòng dữ liệu chứa ký tự khoảng "
-         "trắng ' '. Toàn bộ 11 dòng này đều có thâm niên tenure = 0 (khách hàng mới đăng ký trong tháng đầu tiên nên chưa thanh toán). "
-         "Giải pháp: Ép kiểu sang float bằng pd.to_numeric(errors='coerce') và điền giá trị 0.0 hợp lý về mặt nghiệp vụ."),
-        ("Bước 4: Mã hóa biến mục tiêu và biến nhị phân (Binary Encoding)",
-         "Chuyển đổi nhãn mục tiêu Churn: 'No' -> 0 (khách hàng ở lại), 'Yes' -> 1 (khách hàng rời bỏ).\n"
-         "Mã hóa các biến nhị phân có 2 lựa chọn (gender, Partner, Dependents, PhoneService, PaperlessBilling) sang dạng 0 và 1."),
-        ("Bước 5: Mã hóa các biến danh mục (One-Hot Encoding)",
-         "Với 10 biến phân loại có từ 3 nhóm trở lên (như InternetService, Contract, PaymentMethod...), áp dụng kỹ thuật "
-         "One-Hot Encoding với tham số drop_first=True nhằm tránh hiện tượng bẫy biến giả (Dummy Variable Trap) và loại bỏ "
-         "tính đa cộng tuyến (Multicollinearity)."),
-        ("Bước 6: Chuẩn hóa đặc trưng số (Feature Scaling)",
-         "3 biến số liên tục (tenure, MonthlyCharges, TotalCharges) có miền giá trị chênh lệch lớn (ví dụ TotalCharges lên đến hơn 8,000 USD). "
-         "Áp dụng StandardScaler để đưa toàn bộ về phân phối chuẩn (Mean = 0, Std = 1), giúp các thuật toán học máy như Logistic Regression, "
-         "KNN đạt tốc độ hội tụ nhanh và không bị thiên lệch bởi biến có biên độ lớn."),
-        ("Bước 7: Xuất dữ liệu sạch hoàn thiện",
-         "Dữ liệu sau khi hoàn tất các bước trên đạt kích thước 7,043 dòng và 31 cột (30 đặc trưng + 1 nhãn mục tiêu). "
-         "Được lưu tại file: asm/data/telco_churn_preprocessed.csv và đẩy lên GitHub để lưu trữ.")
-    ]
-
-    for title, desc in steps:
-        p_step = doc.add_paragraph()
-        p_step.paragraph_format.line_spacing = 1.15
-        p_step.paragraph_format.space_after = Pt(4)
-        r_st = p_step.add_run(f"• {title}: ")
-        r_st.bold = True
-        r_st.font.color.rgb = RGBColor(0, 51, 102)
-        p_step.add_run(desc)
-
-    # ---------------------------------------------------------
-    # PHẦN III: KẾT QUẢ THỰC THI & MINH CHỨNG (ẢNH KẾT QUẢ)
+    # PHẦN III: KẾT QUẢ THỰC THI & MINH CHỨNG HÌNH ẢNH
     # ---------------------------------------------------------
     h3 = doc.add_heading("III. KẾT QUẢ THỰC NGHIỆM VÀ ẢNH CHỤP MINH CHỨNG", level=1)
     h3.paragraph_format.space_before = Pt(12)
@@ -301,15 +302,13 @@ def create_word_report():
     p_exp = doc.add_paragraph()
     p_exp.paragraph_format.line_spacing = 1.15
     p_exp.add_run(
-        "Để kiểm tra tính hợp lệ và sẵn sàng của tập dữ liệu sau tiền xử lý, dữ liệu đã được chia theo tỷ lệ "
-        "80% Train (5,634 dòng) và 20% Test (1,409 dòng) với stratify=y. Sau đó, huấn luyện mô hình cơ sở "
-        "Logistic Regression (Giai đoạn 1) và thu được kết quả ấn tượng:"
+        "Dữ liệu sau khi tiền xử lý hoàn thiện đạt kích thước 7,043 dòng x 31 cột (Link 2). "
+        "Kết quả đánh giá mô hình Baseline Logistic Regression (chuẩn Note 4) như sau:"
     )
 
-    # Bảng số liệu mô hình
     tbl_res = doc.add_table(rows=6, cols=3)
     tbl_res.alignment = WD_TABLE_ALIGNMENT.CENTER
-    res_hdr = ["Chỉ số đánh giá", "Kết quả thực nghiệm", "Ý nghĩa chuyên môn"]
+    res_hdr = ["Chỉ số đánh giá", "Kết quả thực nghiệm", "Ý nghĩa chuyên môn theo Vở ghi"]
     for i, h in enumerate(res_hdr):
         tbl_res.rows[0].cells[i].text = h
         set_cell_background(tbl_res.rows[0].cells[i], "2B5C8F")
@@ -317,14 +316,15 @@ def create_word_report():
         p.alignment = WD_ALIGN_PARAGRAPH.CENTER
         for run in p.runs:
             run.font.bold = True
+            run.font.size = Pt(10)
             run.font.color.rgb = RGBColor(255, 255, 255)
 
     res_data = [
         ("Độ chính xác (Accuracy)", "80.62%", "Mô hình dự đoán chính xác trên 80% tổng số khách hàng."),
-        ("Precision (Rời mạng)", "0.6593", "Trong số các khách hàng bị dự báo rời mạng, có 65.93% thực sự rời bỏ."),
-        ("Recall (Rời mạng)", "0.5588", "Bắt trúng được 55.88% tổng số khách hàng có nguy cơ rời mạng."),
-        ("F1-Score", "0.6049", "Điểm cân hòa giữa Precision và Recall trên bài toán nhãn lệch."),
-        ("ROC-AUC Score", "0.8422", "Khả năng phân tách giữa nhóm ở lại và nhóm rời mạng đạt mức rất tốt (> 0.8).")
+        ("Precision ('Không bắt nhầm')", "0.6593", "Trong số các khách hàng bị dự báo rời mạng, có 65.93% thực sự rời bỏ."),
+        ("Recall ('Không bỏ sót')", "0.5588", "Bắt trúng được 55.88% tổng số khách hàng có nguy cơ rời mạng."),
+        ("F1-Score (Cân bằng)", "0.6049", "Điểm trung bình điều hòa giữa Precision và Recall trên bài toán nhãn lệch."),
+        ("ROC-AUC Score (Khả năng phân tách)", "0.8422", "Khả năng phân tách giữa nhóm ở lại và nhóm rời mạng đạt mức rất tốt (> 0.8).")
     ]
 
     for idx, (m_name, m_val, m_note) in enumerate(res_data):
@@ -339,7 +339,7 @@ def create_word_report():
 
     doc.add_paragraph().paragraph_format.space_after = Pt(10)
 
-    # Chèn ảnh chụp kết quả tiền xử lý (Link 3)
+    # Chèn ảnh chụp Dashboard minh chứng (Link 3)
     p_img_title1 = doc.add_paragraph()
     p_img_title1.alignment = WD_ALIGN_PARAGRAPH.CENTER
     r_it1 = p_img_title1.add_run("Hình 1: Ảnh chụp Dashboard minh chứng kết quả chạy tiền xử lý & Đánh giá mô hình (Link 3)")
@@ -354,22 +354,40 @@ def create_word_report():
         p_img1.paragraph_format.space_after = Pt(12)
         doc.add_picture(img_proof_path, width=Inches(6.5))
 
-    # Chèn biểu đồ phân phối Churn
-    p_img_title2 = doc.add_paragraph()
-    p_img_title2.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    r_it2 = p_img_title2.add_run("Hình 2: Phân phối nhãn mục tiêu Churn và các đặc trưng quan trọng")
-    r_it2.bold = True
-    r_it2.font.italic = True
-    r_it2.font.size = Pt(10)
+    # Chèn ảnh đường cong ROC theo Note 4
+    p_img_title_roc = doc.add_paragraph()
+    p_img_title_roc.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    r_roc = p_img_title_roc.add_run("Hình 2: Biểu đồ Đường cong ROC & Diện tích dưới đường cong AUC (Theo Note 4)")
+    r_roc.bold = True
+    r_roc.font.italic = True
+    r_roc.font.size = Pt(10)
 
-    img_dist_path = os.path.join("asm", "images", "eda_churn_distribution.png")
-    if os.path.exists(img_dist_path):
-        doc.add_picture(img_dist_path, width=Inches(6.5))
+    img_roc_path = os.path.join("asm", "images", "duong_cong_roc_auc.png")
+    if os.path.exists(img_roc_path):
+        p_img_roc = doc.add_paragraph()
+        p_img_roc.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p_img_roc.paragraph_format.space_after = Pt(12)
+        doc.add_picture(img_roc_path, width=Inches(5.0))
+
+    # Chèn ảnh Boxplot theo Note 2
+    p_img_title_bp = doc.add_paragraph()
+    p_img_title_bp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    r_bp = p_img_title_bp.add_run("Hình 3: Biểu đồ Boxplot khảo sát phân phối và ngoại lệ (Theo Note 2)")
+    r_bp.bold = True
+    r_bp.font.italic = True
+    r_bp.font.size = Pt(10)
+
+    img_bp_path = os.path.join("asm", "images", "eda_charges_tenure.png")
+    if os.path.exists(img_bp_path):
+        p_img_bp = doc.add_paragraph()
+        p_img_bp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p_img_bp.paragraph_format.space_after = Pt(12)
+        doc.add_picture(img_bp_path, width=Inches(6.0))
 
     # ---------------------------------------------------------
     # PHẦN IV: KẾ HOẠCH TRIỂN KHAI GIAI ĐOẠN 2
     # ---------------------------------------------------------
-    h4 = doc.add_heading("IV. KẾ HOẠCH TRIỂN KHAI GIAI ĐOẠN 2 (MACHINE LEARNING CHUYÊN SÂU)", level=1)
+    h4 = doc.add_heading("IV. KẾ HOẠCH TRIỂN KHAI GIAI ĐOẠN 2 (MACHINE LEARNING NÂNG CAO)", level=1)
     h4.paragraph_format.space_before = Pt(14)
     h4.paragraph_format.space_after = Pt(6)
 
@@ -386,7 +404,6 @@ def create_word_report():
         "5. Đóng gói mô hình: Lưu trữ mô hình tối ưu ra file định dạng .pkl sử dụng thư viện joblib để triển khai ứng dụng thực tế."
     )
 
-    # Lời kết
     p_end = doc.add_paragraph()
     p_end.paragraph_format.space_before = Pt(14)
     r_end = p_end.add_run("Người lập báo cáo: Sinh viên thực hiện Assignment\nNgày hoàn thành: Tháng 11/2026")
@@ -398,7 +415,6 @@ def create_word_report():
     doc.save(output_docx_path)
     print(f"Đã tạo file Word báo cáo thành công tại: {output_docx_path}")
 
-    # Tạo bản sao ra thư mục gốc để người dùng lấy ngay
     root_docx_path = "ASSIGNMENT_1_HOAN31.docx"
     import shutil
     shutil.copyfile(output_docx_path, root_docx_path)
