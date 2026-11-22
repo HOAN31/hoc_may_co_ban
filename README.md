@@ -26,8 +26,7 @@ hoc_may_co_ban/
 │   ├── tao_file_word_asm1.py           # Script tự động tạo file Word nộp bài
 │   ├── data/
 │   │   ├── telco_customer_churn.csv    # Dữ liệu gốc Telco Churn (7,043 dòng x 21 cột)
-│   │   ├── telco_churn_preprocessed.csv# Dữ liệu sau tiền xử lý (7,043 dòng x 31 cột)
-│   │   └── titanic.csv                 # Dữ liệu tham khảo Titanic
+│   │   └── telco_churn_preprocessed.csv# Dữ liệu sau tiền xử lý (7,043 dòng x 31 cột)
 │   ├── images/
 │   │   ├── ket_qua_chay_tien_xu_ly.png # Ảnh Dashboard kết quả chạy tiền xử lý (Link 3)
 │   │   ├── eda_churn_distribution.png  # Biểu đồ phân phối nhãn Churn
