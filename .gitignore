@@ -9,7 +9,8 @@ __pycache__/
 *$py.class
 
 # Dữ liệu tải về
-data/
+/data/
+!asm/data/*.csv
 
 # Cấu hình môi trường & bảo mật
 .env

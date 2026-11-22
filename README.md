@@ -1,6 +1,17 @@
-# Môn học: Học Máy Cơ Bản (Machine Learning Basics)
+# Môn học: Học Máy Cơ Bản (Machine Learning Basics) - ITA202
 
-Kho lưu trữ bài tập thực hành môn **Học máy cơ bản** - FPT Polytechnic.
+Kho lưu trữ bài tập thực hành & Đồ án môn **Học máy cơ bản** - FPT Polytechnic.
+
+---
+
+## 🌟 NỘP BÀI ASSIGNMENT 1: ĐỀ TÀI 11 - TELCO CUSTOMER CHURN
+> **Yêu cầu nộp bài:** File Word chứa 3 liên kết nộp bài trước 23h59 Chủ nhật.
+> File Word chính thức: [**`ASSIGNMENT_1_HOAN31.docx`**](ASSIGNMENT_1_HOAN31.docx) (hoặc trong thư mục [`asm/ASSIGNMENT_1_HOAN31.docx`](asm/ASSIGNMENT_1_HOAN31.docx)).
+
+### 📌 Bảng 3 Liên kết bắt buộc:
+1. **Link 1 (Mã nguồn):** [https://github.com/HOAN31/hoc_may_co_ban/blob/main/asm/tien_xu_ly_telco.py](https://github.com/HOAN31/hoc_may_co_ban/blob/main/asm/tien_xu_ly_telco.py)
+2. **Link 2 (Dữ liệu sau tiền xử lý):** [https://github.com/HOAN31/hoc_may_co_ban/blob/main/asm/data/telco_churn_preprocessed.csv](https://github.com/HOAN31/hoc_may_co_ban/blob/main/asm/data/telco_churn_preprocessed.csv)
+3. **Link 3 (Ảnh chụp kết quả chạy tiền xử lý):** [https://github.com/HOAN31/hoc_may_co_ban/blob/main/asm/images/ket_qua_chay_tien_xu_ly.png](https://github.com/HOAN31/hoc_may_co_ban/blob/main/asm/images/ket_qua_chay_tien_xu_ly.png)
 
 ---
 
@@ -8,32 +19,27 @@ Kho lưu trữ bài tập thực hành môn **Học máy cơ bản** - FPT Polyt
 
 ```text
 hoc_may_co_ban/
+├── ASSIGNMENT_1_HOAN31.docx            # 📄 File Word chính thức nộp Assignment 1
 ├── asm/                                # 🌟 Assignment: Dự án Machine Learning hoàn chỉnh
-│   ├── data/titanic.csv                # Tập dữ liệu Titanic
-│   ├── images/                         # Các biểu đồ phân tích EDA, Ma trận nhầm lẫn, ROC-AUC
-│   ├── giai_doan_1.py                  # Code Giai đoạn 1 (Mô hình cơ sở)
-│   ├── BAO_CAO_GIAI_DOAN_1.md          # Báo cáo chi tiết Giai đoạn 1
-│   └── README.md                       # Hướng dẫn chi tiết Assignment
-├── lab1/
-│   ├── lab1.py                         # Mã nguồn Lab 1
-│   └── README.md                       # Hướng dẫn chi tiết Lab 1
-├── lab2/
-│   ├── lab2.py                         # Mã nguồn Lab 2
-│   └── README.md                       # Hướng dẫn chi tiết Lab 2
-├── lab3/
-│   ├── lab3.py                         # Mã nguồn Lab 3
-│   ├── bai3_linear_regression.png      # Đồ thị Bài 3 (Lab 3)
-│   ├── bai4_california_results.png     # Đồ thị Bài 4 (Lab 3)
-│   └── README.md                       # Hướng dẫn chi tiết Lab 3
-├── lab4/
-│   ├── lab4.py                         # Mã nguồn Lab 4
-│   ├── bai3_confusion_matrix.png       # Ma trận nhầm lẫn (Lab 4)
-│   ├── bai4_digits_misclassified.png   # 5 mẫu đoán sai (Lab 4)
-│   ├── bai5_roc_curve.png              # Đường cong ROC - AUC (Lab 4)
-│   └── README.md                       # Hướng dẫn chi tiết Lab 4
+│   ├── ASSIGNMENT_1_HOAN31.docx        # Bản lưu file Word báo cáo trong asm/
+│   ├── tien_xu_ly_telco.py             # Code tiền xử lý Đề tài 11 (Telco Customer Churn)
+│   ├── tao_file_word_asm1.py           # Script tự động tạo file Word nộp bài
+│   ├── data/
+│   │   ├── telco_customer_churn.csv    # Dữ liệu gốc Telco Churn (7,043 dòng x 21 cột)
+│   │   ├── telco_churn_preprocessed.csv# Dữ liệu sau tiền xử lý (7,043 dòng x 31 cột)
+│   │   └── titanic.csv                 # Dữ liệu tham khảo Titanic
+│   ├── images/
+│   │   ├── ket_qua_chay_tien_xu_ly.png # Ảnh Dashboard kết quả chạy tiền xử lý (Link 3)
+│   │   ├── eda_churn_distribution.png  # Biểu đồ phân phối nhãn Churn
+│   │   ├── eda_charges_tenure.png      # Phân tích thâm niên & cước phí
+│   │   └── eda_correlation_features.png# Biểu đồ tương quan đặc trưng
+│   └── README.md                       # Báo cáo chi tiết Assignment 1
+├── lab1/                               # Lab 1: NumPy, Pandas & Phân loại bài toán ML
+├── lab2/                               # Lab 2: Tiền xử lý dữ liệu & Pipeline
+├── lab3/                               # Lab 3: Hồi quy tuyến tính (Linear Regression)
+├── lab4/                               # Lab 4: Phân loại – Logistic Regression & Đánh giá
 ├── lab_pdf/                            # Đề bài các bài Lab và Assignment PDF
-├── vo_ghi/                             # Vở ghi chép lý thuyết các bài học
-├── .gitignore                          # Cấu hình bỏ qua .venv và cache
+├── vo_ghi/                             # Vở ghi chép lý thuyết 4 bài học
 └── README.md                           # Tổng quan repository
 ```
 
@@ -43,7 +49,7 @@ hoc_may_co_ban/
 
 | Thư mục | Chủ đề | Chi tiết |
 | :--- | :--- | :--- |
-| **[asm/](asm/)** | **🌟 Assignment: Dự án ML Hoàn Chỉnh (Titanic)** | **Giai đoạn 1:** Khám phá dữ liệu, làm sạch NaN/Outliers, One-Hot, StandardScaler, Pipeline Logistic Regression (Accuracy: 80.45%, AUC: 0.8431). |
+| **[asm/](asm/)** | **🌟 Đề tài 11: Dự báo khách hàng rời mạng (Telco Churn)** | **Assignment 1:** Làm sạch dữ liệu, xử lý missing value `TotalCharges`, One-Hot Encoding, StandardScaler, xuất tập CSV 7,043 dòng x 31 cột, Baseline Logistic Regression (Accuracy: 80.62%, AUC: 0.8422). |
 | **[lab1/](lab1/)** | **Làm quen NumPy, Pandas & Phân loại bài toán ML** | Thao tác mảng/bảng, phân loại Supervised/Unsupervised, thử nghiệm Iris và Digits. |
 | **[lab2/](lab2/)** | **Tiền xử lý dữ liệu & Pipeline** | Điền khuyết dữ liệu, xử lý outlier $3\sigma$, chuẩn hóa StandardScaler/MinMaxScaler, Pipeline, LabelEncoder. |
 | **[lab3/](lab3/)** | **Hồi quy tuyến tính (Linear Regression)** | Dữ liệu giả lập, đánh giá Diabetes (MAE/MSE/RMSE/$R^2$), trực quan hóa đồ thị, California Housing, Ridge Regression. |
@@ -51,21 +57,15 @@ hoc_may_co_ban/
 
 ---
 
-## 🚀 Cài đặt & Chạy chương trình
+## 🚀 Hướng dẫn chạy mã nguồn Tiền xử lý dữ liệu
 
-### 1. Cài đặt các thư viện cần thiết
 ```bash
-pip install numpy pandas scikit-learn matplotlib
-```
+# 1. Kích hoạt môi trường ảo
+.\.venv\Scripts\activate
 
-### 2. Chạy bài tập hoặc Assignment
-```bash
-# Chạy Assignment Giai đoạn 1
-python asm/giai_doan_1.py
+# 2. Chạy script tiền xử lý dữ liệu Đề tài 11
+python asm/tien_xu_ly_telco.py
 
-# Chạy Lab 1 -> Lab 4
-python lab1/lab1.py
-python lab2/lab2.py
-python lab3/lab3.py
-python lab4/lab4.py
+# 3. Tạo lại file Word nộp bài (nếu cần chỉnh sửa)
+python asm/tao_file_word_asm1.py
 ```
