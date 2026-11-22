@@ -1,24 +1,6 @@
 # BÀI TẬP LỚN / ASSIGNMENT GIAI ĐOẠN 1
 ## MÔN: HỌC MÁY CƠ BẢN (ITA202) - FPT POLYTECHNIC
 
----
-
-### THÔNG TIN NỘP BÀI ASSIGNMENT 1 (HẠN: 23H59 CHỦ NHẬT)
-- **Đề tài:** **Đề tài 11 - Phân tích hành vi và dự báo rời bỏ dịch vụ của khách hàng (Customer Churn Analysis)**
-- **Bộ dữ liệu:** Telco Customer Churn (IBM Developer / Kaggle blastchar)
-- **File báo cáo Word chính thức:** [`ASSIGNMENT_1_HOAN31.docx`](../ASSIGNMENT_1_HOAN31.docx)
-
----
-
-### BẢNG 3 LIÊN KẾT NỘP BÀI CHÍNH THỨC THEO YÊU CẦU
-
-| Mục nộp | Nội dung chi tiết | Liên kết trực tiếp |
-| :--- | :--- | :--- |
-| **Link 1: Mã nguồn** | Script Python thực hiện đầy đủ quy trình tiền xử lý dữ liệu và huấn luyện mô hình cơ sở | [**Xem mã nguồn tại GitHub**](https://github.com/HOAN31/hoc_may_co_ban/blob/main/asm/tien_xu_ly_telco.py) |
-| **Link 2: Dữ liệu sau xử lý** | Tập dữ liệu Telco Customer Churn sau khi làm sạch, mã hóa và chuẩn hóa (7.043 dòng x 31 cột) | [**Tải dữ liệu tại GitHub**](https://github.com/HOAN31/hoc_may_co_ban/blob/main/asm/data/telco_churn_preprocessed.csv) |
-| **Link 3: Ảnh chụp kết quả** | Ảnh chụp bảng Dashboard minh chứng kết quả chạy tiền xử lý và đánh giá Baseline Model | [**Xem ảnh kết quả tại GitHub**](https://github.com/HOAN31/hoc_may_co_ban/blob/main/asm/images/ket_qua_chay_tien_xu_ly.png) |
-
----
 
 ### 1. Giới thiệu bài toán & Dữ liệu
 - **Bài toán:** Dự báo nguy cơ khách hàng hủy dịch vụ viễn thông (`Churn: Yes/No`).
